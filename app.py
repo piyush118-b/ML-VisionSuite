@@ -502,6 +502,15 @@ def inject_css():
         transition: width 0.4s ease !important;
     }
 
+    /* Progress bar label text - ensure visibility */
+    div[data-testid="stProgressBar"] + div,
+    div[data-testid="stProgressBar"] p,
+    div[data-testid="stProgressBar"] span {
+        color: #000000 !important;
+        font-weight: 600 !important;
+        font-size: 0.85rem !important;
+    }
+
     /* ══════════════════════════════════════════════
        CODE BLOCKS
     ══════════════════════════════════════════════ */

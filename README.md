@@ -1,5 +1,7 @@
 # 🧠 ML Vision Suite
 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ml-visionsuitegit-ztf92b7mnjyg3tveat5uqd.streamlit.app/)
+
 Welcome to the **ML Vision Suite**! This is a project I built to bring together different "senses" of AI—sight, sound, and data—into one beautiful, easy-to-use dashboard. 
 
 Whether it's spotting fire in a video or solving an audio puzzle, this suite shows what's possible when modern AI meets elegant design.
@@ -65,7 +67,10 @@ The suite looks premium, but under the hood, it’s powered by some heavy hitter
 
 ## 🌍 Take it to the Web
 
-This app was built specifically to shine on **Streamlit Community Cloud**. 
+This app is live and ready to explore! 
+**[View the Live Demo here](https://ml-visionsuitegit-ztf92b7mnjyg3tveat5uqd.streamlit.app/)**
+
+It was built specifically to shine on **Streamlit Community Cloud**. 
 Just push your project to GitHub (which we've already set up!), connect it at [share.streamlit.io](https://share.streamlit.io/), and you're live!
 
 ---

@@ -74,22 +74,53 @@ By default, the application will be accessible at **[http://localhost:8501](http
 
 ---
 
-## Detailed Module Documentation
+---
 
-### Fire Detection (Video)
-This module uses a MobileNetV2 architecture specifically tuned to detect fire and smoke. To maintain performance, the application samples every 5th frame, providing a real-time confidence score and identifying the exact timestamp of peak activity.
+## Detailed Model Insights
 
-### Mushroom Classifier (Image)
-A Vision-based CNN processes uploaded photos to identify mushroom species. It provides a ranked list of the top 5 most likely candidates, helping users differentiate between species with high confidence scores.
+The ML Vision Suite leverages a variety of specialized architectures to provide high-accuracy inference across different data modalities.
 
-### Audio CAPTCHA Solver
-Our audio solving module combines Convolutional and Recurrent neural networks (CRNN) with CTC decoding. It processes raw audio (WAV/MP3), extracts Mel-spectrograms, and transcribes spoken characters into a clear text output.
+### 🔥 Fire Detection (Video Analytics)
+*   **Architecture**: MobileNetV2 (Lightweight CNN)
+*   **Framework**: TensorFlow / Keras
+*   **Mechanism**: The model performs frame-by-frame binary classification. To optimize for real-time performance in web environments, it employs a **temporal sampling strategy** (sampling every 5th frame by default).
+*   **Core Logic**: Each sampled frame is resized to 224x224 and normalized. The MobileNetV2 backbone extracts features that are then passed through a global average pooling layer and a dense sigmoid output. The suite identifies the "Peak Confidence" frame and provides a cumulative safety verdict.
 
-### Market Basket Analysis
-Based on the FP-Growth algorithm, this tool analyzes retail datasets to find strong associations between products. It calculates Confidence and Lift scores to help understand which items are most likely to be purchased together.
+### 🍄 Mushroom Classifier (Computer Vision)
+*   **Architecture**: Optimized Deep Convolutional Neural Network (CNN)
+*   **Framework**: TensorFlow / Keras
+*   **Scope**: Trained to identify 9 distinct classes of mushrooms (e.g., *Amanita*, *Agaricus*, *Boletus*).
+*   **Mechanism**: Processes images through multiple convolutional and max-pooling layers for spatial feature extraction. The final layer uses **Softmax activation** to provide a probability distribution across known species.
+*   **Output**: Delivers the top species prediction along with a confidence histogram for the top 5 likely candidates.
 
-### Sentiment Analysis
-Leveraging the Hugging Face Transformers library (DistilBERT), this module interprets the emotional weight and tone of text inputs. It provides a score reflecting the model's confidence in identifying positive, negative, or neutral sentiments.
+### 🔊 Audio CAPTCHA Solver (Speech-to-Text)
+*   **Architecture**: Deep CRNN (CNN + Bidirectional GRU)
+*   **Framework**: PyTorch / Torchaudio
+*   **Logic Pipeline**:
+    - **Feature Extraction**: Converts raw audio waveforms into **Mel-Spectrograms**.
+    - **Convolutional Layers**: Extracts acoustic patterns from the frequency-domain data.
+    - **Recurrent Layers**: A Bidirectional GRU models the temporal dependencies of spoken characters.
+    - **CTC Decoding**: Employs **Connectionist Temporal Classification** to map variable-length sequences to text without needing per-character alignment.
+*   **Use Case**: Specifically designed for transcribing noisy alphanumeric audio CAPTCHAs.
+
+### 🛒 Market Basket (Association Rule Mining)
+*   **Algorithm**: FP-Growth (Frequent Pattern Growth)
+*   **Framework**: MLxtend
+*   **Technical Concept**: Unlike gradient-based learning, this uses a tree-based data structure to store transactional patterns efficiently.
+*   **Key Metrics**:
+    - **Support**: Frequency of item occurrence in the dataset.
+    - **Confidence**: Likelihood of purchasing "Item B" when "Item A" is in the cart.
+    - **Lift**: Measures the strength of the association (Lift > 1 implies a relationship stronger than random chance).
+*   **Output**: Dynamic product recommendations based on frequent co-occurrence patterns.
+
+### 📝 Sentiment Analysis (NLP)
+*   **Architecture**: DistilBERT / RoBERTa (Transformer-based)
+*   **Framework**: Hugging Face Transformers
+*   **Mechanism**: Utilizes **Self-Attention mechanisms** to understand the bidirectional context of a sentence. It identifies the semantic weight of words to determine the emotional tone.
+*   **Precision**: Fine-tuned on the SST-2 dataset, providing high sensitivity to complex linguistic structures and emotional modifiers.
+*   **Output**: Sentiment labels (Positive/Negative/Neutral) with detailed probability scores.
+
+---
 
 ---
 

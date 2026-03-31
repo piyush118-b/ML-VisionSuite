@@ -14,6 +14,51 @@ import time
 import streamlit as st
 import numpy as np
 
+def fix_image_orientation(img_bytes):
+    """
+    Correct EXIF orientation so mobile photos are always right-side up.
+    Works for both mushroom classifier and any other PIL-based input.
+    """
+    from PIL import Image, ExifTags
+    import io
+
+    img = Image.open(io.BytesIO(img_bytes))
+
+    try:
+        # Find the EXIF orientation tag number
+        exif_tag_orientation = next(
+            key for key, val in ExifTags.TAGS.items() if val == "Orientation"
+        )
+        exif_data = img._getexif()
+
+        if exif_data and exif_tag_orientation in exif_data:
+            orientation = exif_data[exif_tag_orientation]
+
+            # Rotate/flip based on EXIF orientation value (1–8)
+            if orientation == 2:
+                img = img.transpose(Image.FLIP_LEFT_RIGHT)
+            elif orientation == 3:
+                img = img.rotate(180)
+            elif orientation == 4:
+                img = img.transpose(Image.FLIP_TOP_BOTTOM)
+            elif orientation == 5:
+                img = img.rotate(-90, expand=True).transpose(Image.FLIP_LEFT_RIGHT)
+            elif orientation == 6:
+                img = img.rotate(-90, expand=True)
+            elif orientation == 7:
+                img = img.rotate(90, expand=True).transpose(Image.FLIP_LEFT_RIGHT)
+            elif orientation == 8:
+                img = img.rotate(90, expand=True)
+            # orientation == 1 means no correction needed
+
+    except (AttributeError, StopIteration, Exception):
+        # No EXIF data or unreadable — just use image as-is
+        pass
+
+    # Return corrected image as bytes
+    output = io.BytesIO()
+    img.save(output, format="JPEG")
+    return output.getvalue()
 # ─────────────────────────────────────────────
 # Page config  (must be FIRST streamlit call)
 # ─────────────────────────────────────────────
@@ -1319,6 +1364,7 @@ with tab_mushroom:
 
         if uploaded:
             img_bytes = uploaded.read()
+            img_bytes = fix_image_orientation(img_bytes) 
             st.image(img_bytes, caption="Uploaded image", use_container_width=True)
 
     with col_result:

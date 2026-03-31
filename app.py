@@ -626,6 +626,123 @@ def inject_css():
         background: var(--error-dim);
         border-left: 4px solid var(--error);
     }
+    /* ══════════════════════════════════════════════
+   RESPONSIVE BREAKPOINTS — NO DESIGN CHANGES
+══════════════════════════════════════════════ */
+
+/* ── Tablet (max 1024px) ── */
+@media (max-width: 1024px) {
+    .block-container {
+        padding: 1.5rem 2rem 3rem !important;
+    }
+    .px-wordmark .logotype {
+        font-size: 3.2rem !important;
+    }
+    div[data-testid="stMetricValue"] {
+        font-size: 1.8rem !important;
+    }
+}
+
+/* ── Mobile (max 768px) ── */
+@media (max-width: 768px) {
+    .block-container {
+        padding: 1rem 1rem 2.5rem !important;
+    }
+
+    /* Wordmark stacks vertically */
+    .px-wordmark {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+        padding: 1.5rem 0 1.5rem;
+    }
+    .px-wordmark .logotype {
+        font-size: 2.6rem !important;
+    }
+    .px-wordmark .tagline {
+        font-size: 0.85rem !important;
+    }
+    .px-pill {
+        margin-left: 0;
+        margin-top: 0.3rem;
+    }
+
+    /* Cards */
+    .px-card,
+    .px-feature-card,
+    .px-guide {
+        padding: 1.2rem 1.2rem !important;
+    }
+    .px-card-title {
+        font-size: 1.1rem !important;
+    }
+    .px-feature-title {
+        font-size: 1.1rem !important;
+    }
+
+    /* Metrics */
+    div[data-testid="stMetric"] {
+        padding: 1rem 1rem !important;
+    }
+    div[data-testid="stMetricValue"] {
+        font-size: 1.6rem !important;
+    }
+
+    /* Tabs — allow horizontal scroll on tiny screens */
+    .stTabs [data-baseweb="tab-list"] {
+        overflow-x: auto !important;
+        flex-wrap: nowrap !important;
+    }
+    .stTabs [data-baseweb="tab"] {
+        padding: 0.7rem 1rem !important;
+        font-size: 0.72rem !important;
+        white-space: nowrap !important;
+    }
+
+    /* Column padding reset */
+    div[data-testid="column"] {
+        padding: 0 0.25rem !important;
+    }
+
+    /* Result boxes */
+    .px-result {
+        padding: 1rem 1rem !important;
+        font-size: 0.85rem !important;
+    }
+
+    /* Buttons */
+    div.stButton > button {
+        padding: 0.65rem 1.2rem !important;
+        font-size: 0.78rem !important;
+    }
+}
+
+    /* ── Small Mobile (max 480px) ── */
+    @media (max-width: 480px) {
+        .px-wordmark .logotype {
+            font-size: 2rem !important;
+        }
+        .px-feature-icon {
+            font-size: 1.6rem !important;
+        }
+        .px-feature-body {
+            font-size: 0.82rem !important;
+        }
+        .px-card-subtitle {
+            font-size: 0.7rem !important;
+        }
+        div[data-testid="stMetricValue"] {
+            font-size: 1.35rem !important;
+        }
+        /* Section labels compress */
+        .px-section-label {
+            font-size: 0.6rem !important;
+        }
+        /* Guide items */
+        .px-guide-item {
+            font-size: 0.78rem !important;
+        }
+    }
 
     /* ══════════════════════════════════════════════
        STATUS BADGE
@@ -713,7 +830,7 @@ def inject_css():
         color: var(--text-secondary) !important;
         font-size: 0.85rem !important;
     }
-
+    
     </style>
     """, unsafe_allow_html=True)
 
